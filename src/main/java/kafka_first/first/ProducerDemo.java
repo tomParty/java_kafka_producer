@@ -28,7 +28,7 @@ public class ProducerDemo {
         int i = 0;
         while(i < 10) {
             ProducerRecord<String, String> rec =
-                    new ProducerRecord<String, String>("first_topic", "hello from java" + i);
+                    new ProducerRecord<String, String>("first_topic", "hello from java " + i);
             producer.send(rec, new Callback() {
                 public void onCompletion(RecordMetadata recordMetadata, Exception e) {
                     if(e == null)
