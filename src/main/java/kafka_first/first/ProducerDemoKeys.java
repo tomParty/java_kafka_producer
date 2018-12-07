@@ -7,10 +7,10 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 
-public class ProducerDemo {
+public class ProducerDemoKeys {
 
     public static void main(String[] args) {
-        final Logger logger = LoggerFactory.getLogger(ProducerDemo.class);
+        final Logger logger = LoggerFactory.getLogger(ProducerDemoKeys.class);
 
         //create producer props
         Properties props = new Properties();
@@ -27,8 +27,15 @@ public class ProducerDemo {
         //send data;
         int i = 0;
         while(i < 10) {
+
+            String topic = "first_topic";
+            String value = "Hello World";
+            String key = "id_" + Integer.toString(i);
+
+            logger.info("Key: " + key);
+
             ProducerRecord<String, String> rec =
-                    new ProducerRecord<String, String>("first_topic", "hello from java " + (i));
+                    new ProducerRecord<String, String>( topic, key, value);
             producer.send(rec, new Callback() {
                 public void onCompletion(RecordMetadata recordMetadata, Exception e) {
                     if(e == null)
